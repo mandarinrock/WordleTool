@@ -4,7 +4,7 @@ debug = True
 
 
 # output holds the output file
-output = open("quardleList", "w")
+output = open("answerList", "w")
 
 
 # terminate() closes @output and ends the program
@@ -44,8 +44,8 @@ def comboGen(comboLen = None):
         comboLen = 4
 
     # Open a word list
-    with open("WordLists/officialGuesses") as listFile:
-    # with open("WordLists/officialAnswers") as listFile:
+    # with open("WordLists/officialGuesses") as listFile:
+    with open("WordLists/officialAnswers") as listFile:
 
         # Copy the word list to memory as wordList
         wordList = listFile.read().splitlines()
@@ -59,13 +59,17 @@ def comboGen(comboLen = None):
 
     # Initialize the combination
     combination = [0] * comboLen
+
+    # firstWord = 0
+
+    # # TEMP
+    # combination[0] = 2050
+    # combination[1] = 2050
+    # combination[2] = 2050
+    # combination[3] = 2050
+    firstWord = 1 + combination[0]
     # Initialize the alphabet
     alphabet = []
-
-    # combination[0] = 99
-    # combination
-
-    firstWord = 1 + combination[0]
 
     printCounter = 0
     answerCount = 0
@@ -76,7 +80,7 @@ def comboGen(comboLen = None):
 
     while(combination[0] < len(wordList)):
 
-        if  firstWord < combination[0]:
+        if firstWord < combination[0]:
             firstWord = combination[0]
 
         # if debug:
@@ -162,15 +166,12 @@ def comboGen(comboLen = None):
                             # printCounter += 1
                         else:
                             printCounter -= 1
-
-                        print(len(alphabet), end= ": ")
-                        print(answerList)
-                        output.write(str(len(alphabet)))
-                        output.write(": ")
-                        saveAnswers(answerList)
                         if len(alphabet) > 23:
+                            output.write(str(len(alphabet)))
+                            output.write(": ")
+                            saveAnswers(answerList)
                             # printCounter = 10
-                            for jackpot in range(5):
+                            for jackpot in range(10):
                                 print("===================================================")
                                 print("  ===============================================")
                                 print("   ============================================\n")
@@ -180,7 +181,10 @@ def comboGen(comboLen = None):
                                 print("\n   ============================================")
                                 print("  ===============================================")
                                 print("===================================================\n")
+
+
                         # terminate()
+                        
                     
                     # if debug:
                     #     if len(alphabet) > 24:
