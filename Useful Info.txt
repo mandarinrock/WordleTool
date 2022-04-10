@@ -1,0 +1,149 @@
+Total letter frequency: 4125
+Spot frequency: 1168
+areae
+
+Total unique letter frequency: 3732
+Spot frequency: 712
+aeros
+
+Total spot frequency: 3845
+Spot frequency: 1572
+saree
+
+Total unique spot frequency: 3454
+Unique spot frequency: 1539
+saine
+
+
+
+from "WordLists/officialAnswers"
+
+1. [fjord, plumb, vying, whack, zesty] (24)
+    Total Combination Frequency: 9238
+    Total Spot Frequency: 3409
+
+2. [shuck, vixen, waltz, fjord, pygmy] (24)
+    Total Combination Frequency: 8998
+    Total Spot Frequency: 3592
+
+
+
+from "WordLists/officialGuesses"
+
+3. [advew, bortz, clunk, fiqhs, gymps] (24)
+    Total Combination Frequency: 9812
+    Total Spot Frequency: 2845
+
+4. [advew, bortz, filch, gymps, junks] (24)
+    Total Combination Frequency: 9810
+    Total Spot Frequency: 2754
+
+5. [advew, bortz, filch, gymps, junky] (24)
+    Total Combination Frequency: 9238
+    Total Spot Frequency: 3082
+
+6. [advew, clomb, fiqhs, grypt, junks] (24)
+    Total Combination Frequency: 9803
+    Total Spot Frequency: 2812
+
+7. [advew, clomb, fiqhs, grypt, junky] (24)
+    Total Combination Frequency: 9231
+    Total Spot Frequency: 3140
+
+8. [advew, clonk, fiqhs, grypt, jumby] (24)
+    Total Combination Frequency: 9231
+    Total Spot Frequency: 3249
+
+9. [advew, clonk, fiqhs, grypt, zombi] (24)
+    Total Combination Frequency: 10069
+    Total Spot Frequency: 2973
+
+10. [advew, clunk, fiqhs, grypt, zombi] (24)
+    Total Combination Frequency: 9839
+    Total Spot Frequency: 2895
+
+11. [advew, filch, grypt, junks, zombi] (24)
+    Total Combination Frequency: 9837
+    Total Spot Frequency: 2804
+
+
+
+
+
+
+1. [zesty, whack, fjord, plumb, vying]
+zesty: Total Frequency = 2012, Spot Frequency = 827
+whack: Total Frequency = 1880, Spot Frequency = 795
+fjord: Total Frequency = 1885, Spot Frequency = 648
+plumb: Total Frequency = 1878, Spot Frequency = 585
+vying: Total Frequency = 1583, Spot Frequency = 554
+
+2. [shuck, vixen, pygmy, fjord, waltz]
+shuck: Total Frequency = 1888, Spot Frequency = 937
+vixen: Total Frequency = 2091, Spot Frequency = 704
+pygmy: Total Frequency = 972, Spot Frequency = 662
+fjord: Total Frequency = 1885, Spot Frequency = 648
+waltz: Total Frequency = 2162, Spot Frequency = 641
+
+3. [clunk, bortz, advew, fiqhs, gymps]
+clunk: Total Frequency = 2010, Spot Frequency = 858
+bortz: Total Frequency = 2161, Spot Frequency = 758
+advew: Total Frequency = 2324, Spot Frequency = 544
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+gymps: Total Frequency = 1544, Spot Frequency = 284
+
+4. [bortz, filch, advew, junks, gymps]
+bortz: Total Frequency = 2161, Spot Frequency = 758
+filch: Total Frequency = 2117, Spot Frequency = 735
+advew: Total Frequency = 2324, Spot Frequency = 544
+junks: Total Frequency = 1664, Spot Frequency = 433
+gymps: Total Frequency = 1544, Spot Frequency = 284
+
+5. [junky, bortz, filch, advew, gymps]
+junky: Total Frequency = 1092, Spot Frequency = 761
+bortz: Total Frequency = 2161, Spot Frequency = 758
+filch: Total Frequency = 2117, Spot Frequency = 735
+advew: Total Frequency = 2324, Spot Frequency = 544
+gymps: Total Frequency = 1544, Spot Frequency = 284
+
+6. [clomb, grypt, advew, junks, fiqhs]
+clomb: Total Frequency = 2243, Spot Frequency = 720
+grypt: Total Frequency = 1799, Spot Frequency = 714
+advew: Total Frequency = 2324, Spot Frequency = 544
+junks: Total Frequency = 1664, Spot Frequency = 433
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+
+7. [junky, clomb, grypt, advew, fiqhs]
+junky: Total Frequency = 1092, Spot Frequency = 761
+clomb: Total Frequency = 2243, Spot Frequency = 720
+grypt: Total Frequency = 1799, Spot Frequency = 714
+advew: Total Frequency = 2324, Spot Frequency = 544
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+
+8. [clonk, grypt, jumby, advew, fiqhs]
+clonk: Total Frequency = 2240, Spot Frequency = 936
+grypt: Total Frequency = 1799, Spot Frequency = 714
+jumby: Total Frequency = 1095, Spot Frequency = 654
+advew: Total Frequency = 2324, Spot Frequency = 544
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+
+9. [clonk, grypt, advew, fiqhs, zombi]
+clonk: Total Frequency = 2240, Spot Frequency = 936
+grypt: Total Frequency = 1799, Spot Frequency = 714
+advew: Total Frequency = 2324, Spot Frequency = 544
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+zombi: Total Frequency = 1933, Spot Frequency = 378
+
+10. [clunk, grypt, advew, fiqhs, zombi]
+clunk: Total Frequency = 2010, Spot Frequency = 858
+grypt: Total Frequency = 1799, Spot Frequency = 714
+advew: Total Frequency = 2324, Spot Frequency = 544
+fiqhs: Total Frequency = 1773, Spot Frequency = 401
+zombi: Total Frequency = 1933, Spot Frequency = 378
+
+11. [filch, grypt, advew, junks, zombi]
+filch: Total Frequency = 2117, Spot Frequency = 735
+grypt: Total Frequency = 1799, Spot Frequency = 714
+advew: Total Frequency = 2324, Spot Frequency = 544
+junks: Total Frequency = 1664, Spot Frequency = 433
+zombi: Total Frequency = 1933, Spot Frequency = 378
