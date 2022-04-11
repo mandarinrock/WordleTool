@@ -355,10 +355,10 @@ def wordleBot():
         if count % 100 == 0:
             # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
             averageGuesses = totalGuesses / count
-            print("The bot took an average of", averageGuesses,"guesses to find", totalSuccess, "of", count, "words so far")
+            print("The bot took an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
     else:
         averageGuesses = totalGuesses / count
-        print("\nThe bot took an average of", averageGuesses, "guesses to find", totalSuccess, "of", len(allAnswers), "total words")
+        print("\nThe bot took an average of", format(averageGuesses, ".3f"), "guesses to find", totalSuccess, "of", len(allAnswers), "total words\n")
 
 
 def main():
