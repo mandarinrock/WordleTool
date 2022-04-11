@@ -1,17 +1,18 @@
 # DELETE from os.path import exists
 import copy
+import random
 from sys import platform
 if platform == "win32": import winsound
 
 
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
-# debug = False
+debug = False
 
 # TEMP lists = "officialGuesses"
 lists = "NewLists/defaultRunList"
-listPath = "WordLists/" + lists
-
+baseFolder = "WordLists/"
+listPath =  baseFolder + lists
 
 
 # terminate() closes @output and ends the program
@@ -19,20 +20,25 @@ def terminate(): quit()
 
 def alarm(frequency = None, duration = None, repeat = None):
 
+
     if repeat == None: repeat = 1
     if frequency == None: frequency = 350  # Set Frequency To 3500 Hertz
     if duration == None: duration = 100  # Set Duration To 100 ms == 0.1 second
+    # frequency -= random.randrange(1, frequency-37, 10)
+    frequency += random.randrange(1, frequency, 100)
 
     while repeat > 0:
-        if platform == "win32": winsound.Beep(frequency, duration)
-        else: print("\a")
-        repeat -= 1
+
+        # if platform == "win32": winsound.Beep(frequency, duration)
+        # else: print("\a")
+        repeat -= 1#random.randrange(1, 5, 1)
 
 
 def loadList(name = None):
 
     global lists
-    global fileName
+    global listPath
+    global baseFolder
 
     if name == None: name = lists
     else :
@@ -41,9 +47,11 @@ def loadList(name = None):
         elif name == '3' or  name == 3: lists = "wordleAnswers"
         elif name == '4' or  name == 4: lists = "wordleGuesses"
         # elif name == '5' or  name == 5: lists = "zenList"
-        else: lists = name
+        else:
+            lists = name
+            baseFolder += "NewLists/"
 
-    listPath = "WordLists/" + str(lists)
+    listPath = baseFolder + str(lists)
 
     # Open the specificied list
     with open(listPath) as listFile:
@@ -189,11 +197,11 @@ def comboGen(comboLen = None, openFrom = None):
         
 
     # Open a word list
-    with open("WordLists/officialGuesses") as listFile:
+    # OLD with open("WordLists/officialGuesses") as listFile:
     # with open("WordLists/officialAnswers") as listFile:
 
         # Copy the word list to memory as wordList
-        wordList = listFile.read().splitlines()
+        # OLD wordList = listFile.read().splitlines()
 
     # ---------------------- NOTE -----------------------
     # If we think of our combination as a comboLen digit
@@ -202,25 +210,30 @@ def comboGen(comboLen = None, openFrom = None):
     # until it reaches n and rolls over to the next digit
     # ---------------------- NOTE -----------------------
 
-
+    wordList = loadList()
 
     # Initialize the combination
     combination = [0] * comboLen
+    # combination = [0, 0, 0, 0, 0]
     # Initialize the alphabet
     alphabet = []
 
     if openFrom == None:
 
-        combinations = loadProgress()
+        combination = loadProgress()
 
     elif openFrom != None:
 
-        if openFrom[-1] >= '0' and openFrom[-1] <= '9':
-            for i in range(len(openFrom)):
-                combinations[i] = openFrom[i]
+        if debug: print("Printing openFrom in comboGen()", openFrom)
 
-
-            combination[i] = wordList.index(openFrom)
+        # if openFrom[-1] >= 0 and openFrom[-1] <= 9:
+        j = 0
+        for i in openFrom:
+            if type(i) is int:
+                combination[j] = i
+            elif type(i) is str:
+                combination.index(i)
+            j += 1
 
     # combination[0] = 99
     # combination
@@ -287,7 +300,14 @@ def comboGen(comboLen = None, openFrom = None):
 
                     if len(alphabet) >= 23:
 
-                        alarm(400, 200, 1)
+                        randomizer = random.randrange(0, 50, 1)
+
+                        if randomizer == 0:
+                            alarm(1500 - random.randrange(1, 950, 50), 150 - random.randrange(0, 150, 10), 2 - random.randrange(0, 2, 1))
+                        elif randomizer < 10:
+                            alarm(800 - random.randrange(0, 100, 50), 50, 1)
+                        elif randomizer < 12:
+                            alarm(600 - random.randrange(0, 100, 50) + random.randrange(0, 500, 50), 800, 1)
 
                         answerCount += 1
 
@@ -302,19 +322,56 @@ def comboGen(comboLen = None, openFrom = None):
                             print(len(alphabet), end= ": ")
                             print(answerList, end=" #")
                             print(answerCount)
+                            printCounter += 20
                             
                         else:
                             printCounter -= 1
 
-                        print(len(alphabet), end= ": ")
-                        print(answerList)
+                        # print(len(alphabet), end= ": ")
+                        # print(answerList)
                         # output.write(str(len(alphabet)))
                         # output.write(": ")
                         saveAnswers(answerList)
 
-                        if len(alphabet) > 23:
+                        if len(alphabet) == 24:
 
-                            with open("24+ Unique Letters.txt", "a") as quickSave:
+                            alarm(350, 150, 2)
+
+                            outputPath = "Outputs/" + lists
+                            outputPath += " 24+ Unique Letters.txt"
+
+                            with open(outputPath, "a") as quickSave:
+
+                                for values in combination: quickSave.write("%d " % values)
+                                quickSave.write("\n")
+
+                                for values in answerList: quickSave.write("%s " % values)
+                                quickSave.write("\n")
+
+                            randomizer24 = random.randrange(0, 5, 1)
+                            # if randomizer24 == 1:
+                            #     alarm(1000 - random.randrange(1, 950, 50), 300, 3 - random.randrange(0, 2, 1))
+                            # else:
+                            #     alarm(350, 150, 2)
+
+                            # printCounter = 10
+                            # for jackpot in range(5):
+                            print("===================================================")
+                            print("  ===============================================")
+                            print("   ============================================\n")
+                            print(" ", end="")
+                            print(len(alphabet), end= ": ")
+                            print(answerList)
+                            print("\n   ============================================")
+                            print("  ===============================================")
+                            print("===================================================\n")
+
+                        elif len(alphabet) == 25:
+
+                            outputPath = "Outputs/" + lists
+                            outputPath += " 25+ Unique Letters.txt"
+
+                            with open(outputPath, "a") as quickSave:
 
                                 for values in combination: quickSave.write("%d " % values)
                                 quickSave.write("\n")
@@ -323,34 +380,25 @@ def comboGen(comboLen = None, openFrom = None):
                                 quickSave.write("\n")
 
                             
-                            alarm(350, 150, 3)
+                            alarm(700, 50, 5)
 
-                            printCounter = 10
-                            for jackpot in range(5):
-                                print("===================================================")
-                                print("  ===============================================")
-                                print("   ============================================\n")
-                                print(" ", end="")
-                                print(len(alphabet), end= ": ")
-                                print(answerList)
-                                print("\n   ============================================")
-                                print("  ===============================================")
-                                print("===================================================\n")
-
-
-
-
-
-        
-        
-
-
-
-    # while len(alphabet) < 25:
-
-        
-    # # For each word in the combination
-    # for digit in range(comboLen, 0):
+                            # printCounter = 10
+                            # for jackpot in range(5):
+                            print("===================================================")
+                            print("===================================================")
+                            print("  ===============================================")
+                            print("  ===============================================")
+                            print("   ============================================")
+                            print("   ============================================\n")
+                            print(" ", end="")
+                            print(len(alphabet), end= ": ")
+                            print(answerList)
+                            print("\n   ============================================")
+                            print("   ============================================")
+                            print("  ===============================================")
+                            print("  ===============================================")
+                            print("===================================================")
+                            print("===================================================\n")
 
 
 
@@ -371,18 +419,17 @@ def main():
     # print("\n(1) officialAnswers[2309]\t(3) wordleAnswers[2315]")
     # print("(2) officialGuesses[10638]\t(4) worldeGuesses[10657]")
     # print("\n(1) officialAnswers[", len(loadList(1)), "]\t(3) wordleAnswers[", len(loadList(3)), "]\t(5) zenList[", len(loadList(5)), "]")
-    # print("\n(1) officialAnswers[", len(loadList(1)), "]\t(3) wordleAnswers[", len(loadList(3)), "]")
-    # print("(2) officialGuesses[", len(loadList(2)), "]\t(4) worldeGuesses[", len(loadList(4)), "]")
+    print("\n(1) officialAnswers[", len(loadList(1)), "]\t(3) wordleAnswers[", len(loadList(3)), "]")
+    print("(2) officialGuesses[", len(loadList(2)), "]\t(4) worldeGuesses[", len(loadList(4)), "]")
 
-    # print("Choose a list to search.")
-    # TEMP userInput = input("[1/2/3/4/5]: ")
+    print("Choose a list to search.")
+    # userInput = input("[1/2/3/4]: ")
 
-    # TEMP
-    loadList("NewLists/defaultRunList")
-    # TEMP loadList(userInput)
+    loadList("defaultRunList")
+    # loadList(userInput)
 
 
-    comboGen(5, [0,0,0,0,0])
+    comboGen(5, [20,5,5,5,5])
 
 
 
