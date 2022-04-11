@@ -1,0 +1,205 @@
+UNIQUE n[0]:
+    The bot took 7 tries to find: bound
+    The bot took 8 tries to find: catch
+    The bot has taken an average of 3.554 guesses to find 498 of 500 words so far
+    The bot took 7 tries to find: grace
+    The bot has taken an average of 3.549 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.430 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.362 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.318 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+UNIQUE n[1]:
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot has taken an average of 3.548 guesses to find 498 of 500 words so far
+    The bot took 7 tries to find: golly
+    The bot has taken an average of 3.577 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.451 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.386 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.359 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+UNIQUE n[0] + n[1]:
+    The bot took 7 tries to find: bound
+    The bot took 8 tries to find: catch
+    The bot took 7 tries to find: corer
+    The bot has taken an average of 3.544 guesses to find 497 of 500 words so far
+    The bot took 7 tries to find: grace
+    The bot has taken an average of 3.560 guesses to find 996 of 1000 words so far
+    The bot has taken an average of 3.435 guesses to find 1496 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.368 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.334 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+***UNIQUE n[1]/2 + n[0]/5:
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot took 7 tries to find: corer
+    The bot has taken an average of 3.538 guesses to find 497 of 500 words so far
+    The bot has taken an average of 3.552 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.425 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.368 guesses to find 1996 of 2000 words so far
+
+***The bot had an average of 3.334 guesses for 2305 of 2309 total words
+***Amounting to a success rate of  99.83 %
+
+
+UNIQUE n[0] * n[1]
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot took 7 tries to find: corer
+    The bot has taken an average of 3.544 guesses to find 497 of 500 words so far
+    The bot took 7 tries to find: grace
+    The bot has taken an average of 3.564 guesses to find 996 of 1000 words so far
+    The bot has taken an average of 3.437 guesses to find 1496 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.368 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.335 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+UNIQUE n[0] * n[0] + n[1] * n[1]:
+    The bot took 7 tries to find: bound
+    The bot took 8 tries to find: catch
+    The bot has taken an average of 3.536 guesses to find 498 of 500 words so far
+    The bot took 7 tries to find: grace
+    The bot has taken an average of 3.534 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.421 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.354 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.325 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+UNIQUE sqrt(n[0]) + sqrt(n[1]):
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot took 7 tries to find: corer
+    The bot has taken an average of 3.542 guesses to find 497 of 500 words so far
+    The bot took 7 tries to find: grace
+    The bot has taken an average of 3.557 guesses to find 996 of 1000 words so far
+    The bot has taken an average of 3.429 guesses to find 1496 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.364 guesses to find 1995 of 2000 words so far
+
+The bot had an average of 3.329 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+***UNIQUE n[0]/10 + n[1]/5:
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot took 7 tries to find: corer
+    The bot has taken an average of 3.542 guesses to find 497 of 500 words so far
+    The bot has taken an average of 3.553 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.427 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.368 guesses to find 1996 of 2000 words so far
+
+***The bot had an average of 3.333 guesses for 2305 of 2309 total words
+***Amounting to a success rate of  99.83 %
+
+
+
+UNIQUE n[0] - n[1]:
+    The bot took 8 tries to find: catch
+    The bot has taken an average of 3.774 guesses to find 499 of 500 words so far
+    The bot took 7 tries to find: diner
+    The bot has taken an average of 3.730 guesses to find 998 of 1000 words so far
+    The bot has taken an average of 3.589 guesses to find 1498 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.518 guesses to find 1996 of 2000 words so far
+    The bot took 7 tries to find: tight
+
+The bot had an average of 3.476 guesses for 2304 of 2309 total words
+Amounting to a success rate of  99.78 %
+
+
+
+UNIQUE n[0] - n[1]/2:
+    The bot took 7 tries to find: boney
+    The bot took 8 tries to find: catch
+    The bot took 7 tries to find: cease
+    The bot has taken an average of 3.738 guesses to find 497 of 500 words so far
+    The bot has taken an average of 3.749 guesses to find 997 of 1000 words so far
+    The bot has taken an average of 3.642 guesses to find 1497 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.580 guesses to find 1995 of 2000 words so far
+    The bot took 7 tries to find: tight
+
+The bot had an average of 3.540 guesses for 2303 of 2309 total words
+Amounting to a success rate of  99.74 %
+
+UNIQUE n[0]/2 + n[1]*2:
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: catch
+    The bot has taken an average of 3.504 guesses to find 498 of 500 words so far
+    The bot has taken an average of 3.556 guesses to find 998 of 1000 words so far
+    The bot has taken an average of 3.430 guesses to find 1498 of 1500 words so far
+    The bot took 7 tries to find: roger
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.368 guesses to find 1996 of 2000 words so far
+
+The bot had an average of 3.343 guesses for 2305 of 2309 total words
+Amounting to a success rate of  99.83 %
+
+
+NOT UNIQUE n[0]:
+    The bot took 7 tries to find: batch
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: boxer
+    The bot took 8 tries to find: cower
+    The bot has taken an average of 3.786 guesses to find the first 496 of 500 words so far
+    The bot took 7 tries to find: daunt
+    The bot took 7 tries to find: folly
+    The bot took 7 tries to find: gamer
+    The bot took 7 tries to find: grace
+    The bot took 7 tries to find: hover
+    The bot has taken an average of 3.785 guesses to find the first 991 of 1000 words so far
+    The bot took 7 tries to find: joker
+    The bot has taken an average of 3.661 guesses to find the first 1490 of 1500 words so far
+    The bot took 8 tries to find: shade
+    The bot has taken an average of 3.573 guesses to find the first 1989 of 2000 words so far
+
+The bot had an average of 3.550 guesses for 2298 of 2309 total words
+Amounting to a success rate of  99.52 %
+
+
+NOT UNIQUE [1]:
+    The bot took 7 tries to find: batch
+    The bot took 7 tries to find: bound
+    The bot took 7 tries to find: boxer
+    The bot took 7 tries to find: cabby
+    The bot has taken an average of 3.598 guesses to find 496 of 500 words so far
+    The bot took 7 tries to find: fight
+    The bot has taken an average of 3.634 guesses to find 995 of 1000 words so far
+    The bot has taken an average of 3.518 guesses to find 1495 of 1500 words so far
+    The bot took 7 tries to find: shade
+    The bot has taken an average of 3.434 guesses to find 1994 of 2000 words so far
+
+The bot had an average of 3.394 guesses for 2303 of 2309 total words
+Amounting to a success rate of  99.74 %

@@ -14,6 +14,87 @@ Total unique spot frequency: 3454
 Unique spot frequency: 1539
 saine
 
+2nd guesses: court: Total Frequency = 2765, Spot Frequency = 1045
+
+    booty: Total Frequency = 2195, Spot Frequency = 1198
+    forty: Total Frequency = 2119, Spot Frequency = 1080
+    glory: Total Frequency = 2270, Spot Frequency = 1072
+    goody: Total Frequency = 1994, Spot Frequency = 1070
+    moody: Total Frequency = 1999, Spot Frequency = 1062
+    curry: Total Frequency = 2339, Spot Frequency = 1060
+    folly: Total Frequency = 2080, Spot Frequency = 1052
+    burly: Total Frequency = 2040, Spot Frequency = 1047
+    court: Total Frequency = 2765, Spot Frequency = 1045
+    worry: Total Frequency = 2302, Spot Frequency = 1038
+    golly: Total Frequency = 2146, Spot Frequency = 1032
+    dolly: Total Frequency = 2152, Spot Frequency = 1028
+    loopy: Total Frequency = 2320, Spot Frequency = 1023
+    proxy: Total Frequency = 1778, Spot Frequency = 1018
+    furry: Total Frequency = 2098, Spot Frequency = 997
+    bully: Total Frequency = 1916, Spot Frequency = 996
+    godly: Total Frequency = 1860, Spot Frequency = 995
+    woozy: Total Frequency = 1663, Spot Frequency = 988
+    clout: Total Frequency = 2641, Spot Frequency = 976
+    crock: Total Frequency = 2365, Spot Frequency = 971
+    moult: Total Frequency = 2471, Spot Frequency = 966
+    grout: Total Frequency = 2590, Spot Frequency = 960
+    broth: Total Frequency = 2375, Spot Frequency = 959
+    wordy: Total Frequency = 1892, Spot Frequency = 957
+    curvy: Total Frequency = 1806, Spot Frequency = 955
+    crook: Total Frequency = 2616, Spot Frequency = 953
+    pooch: Total Frequency = 2393, Spot Frequency = 950
+    tooth: Total Frequency = 2592, Spot Frequency = 947
+    blurt: Total Frequency = 2456, Spot Frequency = 941
+    gully: Total Frequency = 1916, Spot Frequency = 938
+    dully: Total Frequency = 1922, Spot Frequency = 934
+    color: Total Frequency = 3080, Spot Frequency = 933
+    dryly: Total Frequency = 1641, Spot Frequency = 933
+    moldy: Total Frequency = 1865, Spot Frequency = 931
+    dowry: Total Frequency = 1892, Spot Frequency = 930
+    brook: Total Frequency = 2441, Spot Frequency = 928
+    could: Total Frequency = 2440, Spot Frequency = 922
+    floor: Total Frequency = 2839, Spot Frequency = 922
+    cloth: Total Frequency = 2426, Spot Frequency = 917
+    flout: Total Frequency = 2400, Spot Frequency = 913
+    clock: Total Frequency = 2241, Spot Frequency = 904
+    poppy: Total Frequency = 1682, Spot Frequency = 891
+    bulky: Total Frequency = 1452, Spot Frequency = 889
+    touch: Total Frequency = 2330, Spot Frequency = 880
+    torch: Total Frequency = 2550, Spot Frequency = 878
+    murky: Total Frequency = 1581, Spot Frequency = 874
+    flour: Total Frequency = 2609, Spot Frequency = 872
+    porch: Total Frequency = 2383, Spot Frequency = 870
+    blood: Total Frequency = 2495, Spot Frequency = 866
+    buddy: Total Frequency = 1344, Spot Frequency = 866
+    rocky: Total Frequency = 1981, Spot Frequency = 859
+    broom: Total Frequency = 2618, Spot Frequency = 857
+    cough: Total Frequency = 2123, Spot Frequency = 855
+    chord: Total Frequency = 2349, Spot Frequency = 853
+    pulpy: Total Frequency = 1704, Spot Frequency = 852
+    crowd: Total Frequency = 2276, Spot Frequency = 851
+    botch: Total Frequency = 2134, Spot Frequency = 850
+    dowdy: Total Frequency = 1482, Spot Frequency = 849
+    chock: Total Frequency = 1930, Spot Frequency = 848
+    pygmy: Total Frequency = 972, Spot Frequency = 662
+    humor: Total Frequency = 2369, Spot Frequency = 659
+    hutch: Total Frequency = 1885, Spot Frequency = 652
+    chump: Total Frequency = 1742, Spot Frequency = 631
+    gruff: Total Frequency = 1825, Spot Frequency = 608
+    throw: Total Frequency = 2283, Spot Frequency = 605
+    bluff: Total Frequency = 1701, Spot Frequency = 599
+    throb: Total Frequency = 2375, Spot Frequency = 599
+    polyp: Total Frequency = 1934, Spot Frequency = 591
+    plumb: Total Frequency = 1878, Spot Frequency = 585
+    thump: Total Frequency = 1774, Spot Frequency = 582
+    thrum: Total Frequency = 2150, Spot Frequency = 580
+    myrrh: Total Frequency = 1954, Spot Frequency = 579
+    thumb: Total Frequency = 1734, Spot Frequency = 537
+    glyph: Total Frequency = 1449, Spot Frequency = 531
+    humph: Total Frequency = 1548, Spot Frequency = 502
+    gumbo: Total Frequency = 1972, Spot Frequency = 443
+    hydro: Total Frequency = 1965, Spot Frequency = 374
+    jumbo: Total Frequency = 1730, Spot Frequency = 348
+
 
 
 from "WordLists/officialAnswers"

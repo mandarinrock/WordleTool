@@ -16,27 +16,6 @@ def terminate():
     quit()
 
 
-# # saveAnswers(String[] answers) prints a list of strings, copies to output, and calls terminate()
-# def saveAnswers(answers):
-
-#     # if debug:
-#     #     print("Printing answers") # DEBUG
-
-#     # Write @answers to console
-#     # print(answers) # DEBUG
-
-#     # For each word in answers
-#     for word in answers:
-
-#         # Copy the word to output file, followed by a comma and a space
-#         output.write("'%s', " % word)
-
-#     # After copying the combination
-#     else:
-#         # Add a new line
-#         output.write("\n")
-
-
 def freqCalc(letterFreq, spotFreq, word):
 
     totalFreq = 0
@@ -95,7 +74,7 @@ def frequency(inputCombo):
     for i in range(26):
         if debug:
             print(chr(ord('A') + i), end=": [\t")
-        for j in range(4):
+        for j in range(5): # changed from range(4) to range(5)
             if debug:
                 print(alphabet[i][j], end="\t")
             totals[i] += alphabet[i][j]
@@ -141,6 +120,49 @@ def frequency(inputCombo):
     terminate()
 
 
+def frequencyGen(input):
+
+    if "', '" in input:
+        inputList = input.split(', ')
+        if debug:
+            print("Splitting with: ', '")
+    elif ', ' in input:
+        inputList = input.split(', ')
+        if debug:
+            print("Splitting with: ,")
+    elif '\' ' in input:
+        inputList = input.split('\' ')
+        if debug:
+            print("Splitting with: \'")
+    elif '; ' in input:
+        inputList = input.split('; ')
+        if debug:
+            print("Splitting with: ; ")
+    elif '. ' in input:
+        inputList = input.split('. ')
+        if debug:
+            print("Splitting with: . ")
+    elif ': ' in input:
+        inputList = input.split(': ')
+        if debug:
+            print("Splitting with: : ")
+    elif '][' in input:
+        inputList = input.split('][')
+        if debug:
+            print("Splitting with: ][")
+    elif '|' in input:
+        inputList = input.split('|')
+        if debug:
+            print("Splitting with: |")
+    else:
+        inputList = input.split()
+        if debug:
+            print("Splitting with spaces")
+
+    frequency(inputList)
+
+
+
 
 def main():
 
@@ -150,56 +172,24 @@ def main():
     # while ',' in userInput:
     #     userInput.remove(',')
     # debug = True
-    if "', '" in userInput:
-        inputList = userInput.split(', ')
-        if debug:
-            print("Splitting with: ', '")
-    elif ', ' in userInput:
-        inputList = userInput.split(', ')
-        if debug:
-            print("Splitting with: ,")
-    elif '\' ' in userInput:
-        inputList = userInput.split('\' ')
-        if debug:
-            print("Splitting with: \'")
-    elif '; ' in userInput:
-        inputList = userInput.split('; ')
-        if debug:
-            print("Splitting with: ; ")
-    elif '. ' in userInput:
-        inputList = userInput.split('. ')
-        if debug:
-            print("Splitting with: . ")
-    elif ': ' in userInput:
-        inputList = userInput.split(': ')
-        if debug:
-            print("Splitting with: : ")
-    elif '][' in userInput:
-        inputList = userInput.split('][')
-        if debug:
-            print("Splitting with: ][")
-    elif '|' in userInput:
-        inputList = userInput.split('|')
-        if debug:
-            print("Splitting with: |")
-    else:
-        inputList = userInput.split()
-        if debug:
-            print("Splitting with spaces")
+    
 
-    if debug:
-        print(inputList)
+    # if debug:
+    #     print(inputList)
 
-    print("\n. [", end="")
-    commas = 4
-    for i in inputList:
-        if commas > 0:
-            print(i, end= ", ")
-            commas -= 1
-        else:
-            print(i, end= "] (24)")
+    # print("\n. [", end="")
+    # commas = 4
+    # for i in inputList:
+    #     if commas > 0:
+    #         print(i, end= ", ")
+    #         commas -= 1
+    #     else:
+    #         print(i, end= "] (24)")
     # print(inputList, end=" (24)")
-    frequency(inputList)
+    
+    frequencyGen(userInput)
+
+
 
 
 

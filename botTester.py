@@ -1,5 +1,8 @@
-import math
+# import math
 import copy
+from sys import platform
+if platform == "win32": import winsound
+
 # from time import perf_counter
 
 # Comment or uncomment the 2nd line to toggle debug
@@ -13,8 +16,17 @@ guessCounter = 1
 totalGuesses = 0
 totalSuccess = 0
 totalFail = 0
-divider = 1
 
+def alarm(frequency = None, duration = None, repeat = None):
+
+    if repeat == None: repeat = 1
+    if frequency == None: frequency = 350  # Set Frequency To 3500 Hertz
+    if duration == None: duration = 100  # Set Duration To 100 ms == 0.1 second
+
+    while repeat > 0:
+        if platform == "win32": winsound.Beep(frequency, duration)
+        else: print("\a")
+        repeat -= 1
 
 def loadList(name = None):
 
@@ -221,15 +233,7 @@ def freqCalc(letterFreq, spotFreq, word):
 
 
 def comboSort(n):
-    # return n[1] + n[0]
-    # return n[1]
-    # return n[0]
-    # return n[1]/2 + n[0]/5 # NOTE best so far
-    # return n[0] * n[0] + n[1] * n[1]
-    # return math.sqrt(n[0]) + math.sqrt(n[1])
-    # return n[0]/10 + n[1]/5
-    # return n[0] - n[1]*2
-    return n[0]/divider + n[1]
+    return n[0]/2 + n[1]
 
 
 def frequency(inputCombo):
@@ -352,47 +356,33 @@ def wordleBot():
     global curAnswer
     global allAnswers
     global answerList
-    global divider
-    global totalGuesses
-    global totalSuccess
-    global totalFail
 
     answerList = copy.copy(allAnswers)
 
-
-
-    # while temp != curAnswer:
-    #     temp = guessChecker(temp, checkGuess(temp))
-
-    averageSuccess = 0.0
+    count = 0
     
-    while averageSuccess < 99.9:
-        divider += 1
-        totalGuesses = 0
-        totalFail = 0
-        totalSuccess = 0
+    for curAnswer in allAnswers:
+        count += 1
+    
+        answerList = copy.copy(allAnswers)
+        temp = guessChecker("saine",checkGuess("saine"))
 
-        count = 0
-        
-        for curAnswer in allAnswers:
-            count += 1
-        
-            answerList = copy.copy(allAnswers)
-            temp = guessChecker("saine",checkGuess("saine"))
-
-            while temp != curAnswer:
-                temp = guessChecker(temp, checkGuess(temp))
+        while temp != curAnswer:
+            temp = guessChecker(temp, checkGuess(temp))
 
 
-            if count % 500 == 0:
-                # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
-                averageGuesses = totalGuesses / count
-                # print("The bot has taken an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
-        else:
-            averageGuesses = totalGuesses / (count - totalFail)
-            averageSuccess = 100 * totalSuccess / count
-            print("\nThe bot had an average of", format(averageGuesses, ".3f"), "guesses for", totalSuccess, "of", len(allAnswers), "total words\nAmounting to a success rate of ", str(format(averageSuccess, ".2f")), "%\n")
-            print("Divider = ", divider)
+        if count % 1000 == 0:
+            # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
+            averageGuesses = totalGuesses / count
+            print("The bot has taken an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
+    else:
+        averageGuesses = totalGuesses / (count - totalFail)
+        averageSuccess = 100 * totalSuccess / count
+        print("The bot took ", format(averageGuesses, ".3f"), "guesses on average for", totalSuccess, "of", len(allAnswers), "total words\nAmounting to a success rate of ", str(format(averageSuccess, ".2f")), "%\n")
+
+            
+
+
 
 
 def main():
