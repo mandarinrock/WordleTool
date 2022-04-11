@@ -222,9 +222,19 @@ def frequency(inputCombo):
         if unique:
             best = combo
 
-    print("Enter: " + best[2])
-    userInput = input("Enter results as [B/G/Y]: ")
-    guessChecker(best[2], userInput)
+    print("Try: " + best[2])
+    print("Enter a custom guess")
+    userInput = input("Or enter results as [B/G/Y]: ")
+    nextGuess = best[2]
+    for letter in userInput:
+        if letter != 'b' and letter != 'g' and letter != 'y':
+            nextGuess = userInput
+            userInput = input("Enter results for your guess as [B/G/Y]: ")
+            break
+            
+
+
+    guessChecker(nextGuess, userInput)
     
 
 
@@ -276,14 +286,21 @@ def main():
 
     firstWords = loadList("PerfectStart")
 
-    userInput = input("Enter random seed or press enter:")
-    seed = userInput
-    if seed != "":
+    print("Press enter for a random first word")
+    print("Or enter a random seed")
+    userInput = input("Or enter your own first word: ")
+    
+    if userInput == "":
+        firstWord = random.choice(firstWords)
+        print("Enter: " + firstWord)
+    elif userInput[0] >= '0' and userInput[0] <= '9':
         random.seed(userInput)
+        firstWord = random.choice(firstWords)
+        print("Enter: " + firstWord)
+    else:
+        firstWord = userInput
         
-    firstWord = random.choice(firstWords)
 
-    print("Enter: " + firstWord)
     userInput = input("Enter results as [B/G/Y]: ")
     guessChecker(firstWord, userInput)
 
