@@ -222,10 +222,19 @@ def frequency(inputCombo):
         if unique:
             best = combo
 
-    print("Try: " + best[2])
-    print("Enter a custom guess")
-    userInput = input("Or enter results as [B/G/Y]: ")
     nextGuess = best[2]
+
+    print("\nThe best guess is\t" + best[2])
+    print("\n" + str(len(order)) + " remaining answers")
+    print("Press enter to view all valid answers")
+    print("Enter your own custom guess")
+    userInput = input("Or enter results for the suggested guess as [B/G/Y]: ")
+    if userInput == "":
+        print("The remaining valid answers are:")
+        for combo in order:
+            print(combo[2])
+        print("\nEnter your own custom guess")
+        userInput = input("Or enter results for the suggested guess as [B/G/Y]: ")
     for letter in userInput:
         if letter != 'b' and letter != 'g' and letter != 'y':
             nextGuess = userInput
