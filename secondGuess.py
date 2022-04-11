@@ -71,19 +71,39 @@ def guessChecker(guess, results):
 
     for word in previousList:
 
-        # for letter in blanks:
+        for letter in blanks:
 
-        #     if letter in word:
+            if letter in word:
 
-        #         if letter in greens:
+                if letter in greens or letter in yellows:
 
-        #             for position in range(len(word)):
+                    if letter in greens:
 
-        #                 if word[position] == letter and greens[position] != letter:
+                        for position in range(len(green)):
 
-        #                     if word in answerList:
-        #                         answerList.remove(word)
-        #                         bCount += 1
+                            if word[position] == letter and greens[position] != letter:
+
+                                if word in answerList:
+                                    answerList.remove(word)
+                                    bCount += 1
+
+                    if letter in yellows:
+
+                        for position in yellows[letter]:
+
+                            if word[position] == letter:
+
+                                if word in answerList:
+                                    answerList.remove(word)
+                                    bCount += 1
+
+                else:
+
+                    if word in answerList:
+                        answerList.remove(word)
+                        bCount += 1
+
+
 
 
 
@@ -97,12 +117,14 @@ def guessChecker(guess, results):
                     yCount += 1
 
 
-    # print(answerList)
+    print(answerList)
     if debug:
         print("bCount: ", bCount)
         print("gCount: ", gCount)
         print("yCount: ", yCount)
         print("Remaining: ", len(answerList))
+
+    return(answerList)
 
         
 
