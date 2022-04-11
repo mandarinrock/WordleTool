@@ -1,4 +1,5 @@
 import copy
+from time import perf_counter
 
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
@@ -7,9 +8,10 @@ debug = False
 lists = "officialAnswers"
 baseFolder = "WordLists/"
 listPath =  baseFolder + lists
-guessCounter = 0
+guessCounter = 1
 totalGuesses = 0
 totalSuccess = 0
+totalFail = 0 # DELETE can be deleted tbh
 
 
 def loadList(name = None):
@@ -50,9 +52,13 @@ def guessChecker(guess, results):
     global guessCounter
     global totalGuesses
     global totalSuccess
-    totalGuesses += 1
-    guessCounter += 1
+    global totalFail
+    # totalGuesses += 1
+    # guessCounter += 1
     previousList = copy.copy(answerList)
+
+    if debug:
+        print(previousList)
 
     greens = ['','','','','']
     yellows = {}
@@ -154,24 +160,35 @@ def guessChecker(guess, results):
         print("Remaining: ", len(answerList))
 
     if len(answerList) == 1:
+        totalSuccess += 1
+        totalGuesses += guessCounter
+        guessCounter = 1
         output = answerList[0]
         # print("The bot took", guessCounter, "tries to find:", output)
-        answerList = loadList("officialAnswers")
-        guessCounter = 0
-        totalSuccess += 1
+        # answerList = loadList("officialAnswers")
         return output
         # quit()
     elif len(answerList) < 1:
+        totalFail += 1
+        totalGuesses += guessCounter
+        guessCounter = 1
         print("Something went wrong after", guessCounter, "tries")
+        print(answerList)
         print(curAnswer)
-        answerList = loadList("officialAnswers")
-        guessCounter = 0
+        # answerList = loadList("officialAnswers")
         
         return(curAnswer)
 
     else:
-        return frequency(answerList)
 
+        guessCounter += 1
+        
+        temp = frequency(answerList)
+        if temp == curAnswer:
+            totalSuccess += 1
+            guessCounter = 1
+            totalGuesses += guessCounter
+        return temp
 
 def freqCalc(letterFreq, spotFreq, word):
 
@@ -313,37 +330,40 @@ def wordleBot():
 
     global curAnswer
     global allAnswers
+    global answerList
 
+    answerList = copy.copy(allAnswers)
+
+
+
+    # while temp != curAnswer:
+    #     temp = guessChecker(temp, checkGuess(temp))
+
+
+    
 
     count = 0
     temp = guessChecker("saine",checkGuess("saine"))
-    # print(temp)
+    
     for curAnswer in allAnswers:
-        if curAnswer == "abled":
-            print("")
+        count += 1
+        answerList = copy.copy(allAnswers)
+
         while temp != curAnswer:
             temp = guessChecker(temp, checkGuess(temp))
 
-        if curAnswer == "agony": break
-        # print(temp)
-    # print(temp)
-    # print(curAnswer)
-    averageGuesses = totalGuesses
-    averageGuesses /= len(allAnswers)
-
-    print("The bot took an average of", averageGuesses, "guesses to find", totalSuccess, "of the", len(allAnswers), " words")
+        if count % 100 == 0:
+            # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
+            averageGuesses = totalGuesses / count
+            print("The bot took an average of", averageGuesses,"guesses to find", totalSuccess, "of", count, "words so far")
+    else:
+        averageGuesses = totalGuesses / count
+        print("\nThe bot took an average of", averageGuesses, "guesses to find", totalSuccess, "of", len(allAnswers), "total words")
 
 
 def main():
 
     wordleBot()
-
-    
-
-
-    
-
-
 
 
 if(__name__ == '__main__'):
