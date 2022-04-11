@@ -31,7 +31,7 @@ def freqCalc(letterFreq, spotFreq, word):
     return[totalFreq, spotSum]
 
 def comboSort(n):
-    return -n[1]
+    return n[0]/2 + n[1]
 
 
 def frequency(inputCombo):

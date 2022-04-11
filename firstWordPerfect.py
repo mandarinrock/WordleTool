@@ -356,42 +356,88 @@ def wordleBot():
     global curAnswer
     global allAnswers
     global answerList
+    global totalFail
+    global totalGuesses
+    global totalSuccess
 
-    answerList = copy.copy(allAnswers)
 
-    count = 0
-    seconds = []
     
-    for curAnswer in allAnswers:
-        count += 1
+    # seconds = []
+    commonFails = []
+
+    # possibleGuesses = loadList("officialGuesses")
     
+    # Traverse potential first words backwards to try to speed it up
+    for firstWord in reversed(allAnswers):
+    # for firstWord in allAnswers:
+        # firstWord = "party"
+        print(firstWord)
+    # for firstWord in possibleGuesses:
         answerList = copy.copy(allAnswers)
-        temp = guessChecker("saine",checkGuess("saine"))
-        # print("Results:", checkGuess("saine"), "->", temp)
-        # if temp not in seconds:
-        #     seconds.append(temp)
+        count = 0
+        totalFail = 0
+        totalGuesses = 0
+        totalSuccess = 0
+
+        for curAnswer in commonFails:
+
+            answerList = copy.copy(allAnswers)
+            temp = guessChecker(firstWord,checkGuess(firstWord))
+
+            while temp != curAnswer:
+                temp = guessChecker(temp, checkGuess(temp))
+
+            if totalFail > 0:
+                break
+
+        if totalFail > 0:
+                continue
+        else:
+            answerList = copy.copy(allAnswers)
+            totalFail = 0
+            totalGuesses = 0
+            totalSuccess = 0
+
+
+        for curAnswer in allAnswers:
+            count += 1
         
-
-        while temp != curAnswer:
-            temp = guessChecker(temp, checkGuess(temp))
-
-
-        if count % 1000 == 0:
-            # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
-            averageGuesses = totalGuesses / count
-            print("The bot has taken an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
-    else:
-        # print(listParser(seconds))
-        # seconds.sort()
-        # print(seconds)
-        averageGuesses = totalGuesses / (count - totalFail)
-        averageSuccess = 100 * totalSuccess / count
-        print("The bot took ", format(averageGuesses, ".3f"), "guesses on average for", totalSuccess, "of", len(allAnswers), "total words\nAmounting to a success rate of ", str(format(averageSuccess, ".2f")), "%\n")
-
+            answerList = copy.copy(allAnswers)
+            temp = guessChecker(firstWord,checkGuess(firstWord))
+            # print("Results:", checkGuess("saine"), "->", temp)
+            # if temp not in seconds:
+            #     seconds.append(temp)
             
 
+            while temp != curAnswer:
+                temp = guessChecker(temp, checkGuess(temp))
+
+            if totalFail > 0:
+                if curAnswer not in commonFails:
+                    commonFails.append(curAnswer)
+                    with open("WordLists/NewLists/CommonFails", 'a') as common:
+                        common.write(curAnswer)
+                        common.write(", ")
+                    break
 
 
+
+            # if count % 1000 == 0:
+            #     # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
+            #     averageGuesses = totalGuesses / count
+            #     print("The bot has taken an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
+        else:
+            # print(listParser(seconds))
+            # seconds.sort()
+            # print(seconds)
+
+            if totalFail < 2:
+                averageGuesses = totalGuesses / (count - totalFail)
+                averageSuccess = 100 * totalSuccess / count
+                outputStr = "The word: \'" + firstWord +  "\' took " + str(format(averageGuesses, ".3f")) + " guesses on average for " + str(totalSuccess) + " of " + str(len(allAnswers)) + " total words. Amounting to a success rate of " + str(format(averageSuccess, ".2f")) + "%\n"
+                print(outputStr)
+                with open("Outputs/perfectfirstWords", 'a') as firstWordOutput:
+                    firstWordOutput.write(outputStr)
 
 def main():
 

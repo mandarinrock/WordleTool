@@ -1,5 +1,5 @@
 import copy
-
+import random
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
 debug = False
@@ -274,9 +274,18 @@ def frequencyGen(input):
 
 def main():
 
-    print("Enter: saine")
+    firstWords = loadList("PerfectStart")
+
+    userInput = input("Enter random seed or press enter:")
+    seed = userInput
+    if seed != "":
+        random.seed(userInput)
+        
+    firstWord = random.choice(firstWords)
+
+    print("Enter: " + firstWord)
     userInput = input("Enter results as [B/G/Y]: ")
-    guessChecker("saine", userInput)
+    guessChecker(firstWord, userInput)
 
 
 
