@@ -1,5 +1,6 @@
+import math
 import copy
-from time import perf_counter
+# from time import perf_counter
 
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
@@ -11,7 +12,8 @@ listPath =  baseFolder + lists
 guessCounter = 1
 totalGuesses = 0
 totalSuccess = 0
-totalFail = 0 # DELETE can be deleted tbh
+totalFail = 0
+divider = 1
 
 
 def loadList(name = None):
@@ -53,7 +55,7 @@ def guessChecker(guess, results):
     global totalGuesses
     global totalSuccess
     global totalFail
-    # totalGuesses += 1
+    totalGuesses += 1
     # guessCounter += 1
     previousList = copy.copy(answerList)
 
@@ -160,24 +162,36 @@ def guessChecker(guess, results):
         print("Remaining: ", len(answerList))
 
     if len(answerList) == 1:
+        totalGuesses += 1
         totalSuccess += 1
-        totalGuesses += guessCounter
-        guessCounter = 1
         output = answerList[0]
-        # print("The bot took", guessCounter, "tries to find:", output)
+        # totalGuesses += guessCounter
+        if debug: print("The bot took", guessCounter, "tries to find:", output)
+
+            # answerList = copy.copy(allAnswers) # DELETE
+            # temp = guessChecker("saine",checkGuess("saine")) # DELETE
+            # while temp != curAnswer: # DELETE
+            #     temp = guessChecker(temp, checkGuess(temp)) # DELETE
+        if guessCounter > 6:
+            totalSuccess -= 1
+            totalFail += 1
+            totalGuesses -= guessCounter
+            print("The bot took", guessCounter, "tries to find:", output)
+
+        guessCounter = 1
         # answerList = loadList("officialAnswers")
         return output
         # quit()
     elif len(answerList) < 1:
         totalFail += 1
-        totalGuesses += guessCounter
+        # totalGuesses += guessCounter
+        if debug: print("Something went wrong after", guessCounter, "tries")
         guessCounter = 1
-        print("Something went wrong after", guessCounter, "tries")
         print(answerList)
         print(curAnswer)
         # answerList = loadList("officialAnswers")
         
-        return(curAnswer)
+        return(curAnswer) # TODO try returning nothing instead
 
     else:
 
@@ -185,9 +199,11 @@ def guessChecker(guess, results):
         
         temp = frequency(answerList)
         if temp == curAnswer:
+            if guessCounter == 1:
+                if debug: print("The bot took", guessCounter, "tries to guess:", temp)
             totalSuccess += 1
             guessCounter = 1
-            totalGuesses += guessCounter
+            # totalGuesses += guessCounter
         return temp
 
 def freqCalc(letterFreq, spotFreq, word):
@@ -205,7 +221,15 @@ def freqCalc(letterFreq, spotFreq, word):
 
 
 def comboSort(n):
-    return n[1]# + n[0]
+    # return n[1] + n[0]
+    # return n[1]
+    # return n[0]
+    # return n[1]/2 + n[0]/5 # NOTE best so far
+    # return n[0] * n[0] + n[1] * n[1]
+    # return math.sqrt(n[0]) + math.sqrt(n[1])
+    # return n[0]/10 + n[1]/5
+    # return n[0] - n[1]*2
+    return n[0]/divider + n[1]
 
 
 def frequency(inputCombo):
@@ -258,9 +282,6 @@ def frequency(inputCombo):
         if unique:
             best = combo
 
-    # print("Enter: " + best[2])
-    # userInput = input("Enter results as [B/G/Y]: ")
-    # guessChecker(best[2], userInput)
     return best[2]
 
 
@@ -331,6 +352,10 @@ def wordleBot():
     global curAnswer
     global allAnswers
     global answerList
+    global divider
+    global totalGuesses
+    global totalSuccess
+    global totalFail
 
     answerList = copy.copy(allAnswers)
 
@@ -339,26 +364,35 @@ def wordleBot():
     # while temp != curAnswer:
     #     temp = guessChecker(temp, checkGuess(temp))
 
-
+    averageSuccess = 0.0
     
+    while averageSuccess < 99.9:
+        divider += 1
+        totalGuesses = 0
+        totalFail = 0
+        totalSuccess = 0
 
-    count = 0
-    temp = guessChecker("saine",checkGuess("saine"))
-    
-    for curAnswer in allAnswers:
-        count += 1
-        answerList = copy.copy(allAnswers)
+        count = 0
+        
+        for curAnswer in allAnswers:
+            count += 1
+        
+            answerList = copy.copy(allAnswers)
+            temp = guessChecker("saine",checkGuess("saine"))
 
-        while temp != curAnswer:
-            temp = guessChecker(temp, checkGuess(temp))
+            while temp != curAnswer:
+                temp = guessChecker(temp, checkGuess(temp))
 
-        if count % 100 == 0:
-            # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
-            averageGuesses = totalGuesses / count
-            print("The bot took an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
-    else:
-        averageGuesses = totalGuesses / count
-        print("\nThe bot took an average of", format(averageGuesses, ".3f"), "guesses to find", totalSuccess, "of", len(allAnswers), "total words\n")
+
+            if count % 500 == 0:
+                # print(count, " Answers found:", totalSuccess, "Answers failed:", totalFail, "Current Answer:", curAnswer)
+                averageGuesses = totalGuesses / count
+                # print("The bot has taken an average of", format(averageGuesses, ".3f"),"guesses to find", totalSuccess, "of", count, "words so far")
+        else:
+            averageGuesses = totalGuesses / (count - totalFail)
+            averageSuccess = 100 * totalSuccess / count
+            print("\nThe bot had an average of", format(averageGuesses, ".3f"), "guesses for", totalSuccess, "of", len(allAnswers), "total words\nAmounting to a success rate of ", str(format(averageSuccess, ".2f")), "%\n")
+            print("Divider = ", divider)
 
 
 def main():
