@@ -1,37 +1,15 @@
-# DELETE from os.path import exists
 import copy
-import random
-from sys import platform
-if platform == "win32": import winsound
-
 
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
-debug = False
+# debug = False
 
-# TEMP lists = "officialGuesses"
-lists = "NewLists/defaultRunList"
+lists = "officialAnswers"
+# lists = "NewLists/defaultRunList"
 baseFolder = "WordLists/"
 listPath =  baseFolder + lists
 
 
-# terminate() closes @output and ends the program
-def terminate(): quit()
-
-def alarm(frequency = None, duration = None, repeat = None):
-
-
-    if repeat == None: repeat = 1
-    if frequency == None: frequency = 350  # Set Frequency To 3500 Hertz
-    if duration == None: duration = 100  # Set Duration To 100 ms == 0.1 second
-    # frequency -= random.randrange(1, frequency-37, 10)
-    frequency += random.randrange(1, frequency, 100)
-
-    while repeat > 0:
-
-        # if platform == "win32": winsound.Beep(frequency, duration)
-        # else: print("\a")
-        repeat -= 1#random.randrange(1, 5, 1)
 
 
 def loadList(name = None):
@@ -42,10 +20,10 @@ def loadList(name = None):
 
     if name == None: name = lists
     else :
-        if name == '1' or  name == 1: lists = "officialAnswers"
-        elif name == '2' or  name == 2: lists = "officialGuesses"
-        elif name == '3' or  name == 3: lists = "wordleAnswers"
-        elif name == '4' or  name == 4: lists = "wordleGuesses"
+        if name == '1' or  name == 1 or name == "officialAnswers": lists = "officialAnswers"
+        elif name == '2' or  name == 2 or name == "officialGuesses": lists = "officialGuesses"
+        elif name == '3' or  name == 3 or name == "wordleAnswers": lists = "wordleAnswers"
+        elif name == '4' or  name == 4 or name == "wordleGuesses": lists = "wordleGuesses"
         # elif name == '5' or  name == 5: lists = "zenList"
         else:
             lists = name
@@ -61,123 +39,218 @@ def loadList(name = None):
 
     return WordList
 
+answerList = loadList("officialAnswers")
 
-# saveAnswers(String[] answers) prints a list of strings, copies to output, and calls terminate()
-def saveAnswers(answers):
+def guessChecker(guess, results):
 
-    if debug: print("Saving Answers: ", end="")
+    global answerList
+    previousList = copy.copy(answerList)
 
-    # answerFile holds the output file
-    # if lists == "officialAnswers":
+    greens = ['','','','','']
+    yellows = {}
+    blanks = {}
 
-    #     fileName = "OfficialAnswerCombos"
+    gCount = 0
+    yCount = 0
+    bCount = 0
 
-    # elif lists == "officialGuesses":
+    for i in range(len(results)):
 
-    #     fileName = "OfficialGuessCombos"
+        if results[i] == 'b' or results[i] == 'B' or results[i] >= '-':
 
-    # elif lists == "wordleAnswers":
+            blanks.setdefault(guess[i], []).append(i)
 
-    #     fileName = "WordleAnswerCombos"
+        if results[i] == 'g' or results[i] == 'G' or results[i] >= '+':
 
-    # elif lists == "wordleGuesses":
+            greens[i] == guess[i]
 
-    #     fileName = "WordleGuessCombos"
+        if results[i] == 'y' or results[i] == 'Y' or results[i] >= '0' and results[i] <= '9':
 
-    fileName = "Outputs/" + lists + "Combos"
+            yellows.setdefault(guess[i], []).append(i)
 
-    with open(fileName, "w") as answerFile:
 
-        commas = 4
-        if debug: print("[")
-        for word in answers:
+    for word in previousList:
+
+        # for letter in blanks:
+
+        #     if letter in word:
+
+        #         if letter in greens:
+
+        #             for position in range(len(word)):
+
+        #                 if word[position] == letter and greens[position] != letter:
+
+        #                     if word in answerList:
+        #                         answerList.remove(word)
+        #                         bCount += 1
+
+
+
+        for letter in yellows:
+
+            if letter not in word:
+
+                if word in answerList:
+
+                    answerList.remove(word)
+                    yCount += 1
+
+
+    # print(answerList)
+    if debug:
+        print("bCount: ", bCount)
+        print("gCount: ", gCount)
+        print("yCount: ", yCount)
+        print("Remaining: ", len(answerList))
+
+        
+
+# DELETE guessChecker.answerList = loadList("officialAnswers")
+
+def freqCalc(letterFreq, spotFreq, word):
+
+    totalFreq = 0
+    spotSum = 0
+
+    for i in range(len(word)):
+
+        totalFreq += letterFreq[ord(word[i]) - ord('a')]
+        spotSum += spotFreq[ord(word[i]) - ord('a')][i]
+
+    return[totalFreq, spotSum]
+
+
+
+def comboSort(n):
+    return -n[1]
+
+
+def frequency(inputCombo):
+
+    with open("WordLists/officialAnswers") as listFile:
+
+        wordList = listFile.read().splitlines()
+
+    with open("WordLists/officialGuesses") as guessFile:
+
+        guessList = guessFile.read().splitlines()
+
+    alphabet = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+
+    # Count frequency of all letters in each position
+    for word in wordList:
+
+        if debug:
+            print(word)
+
+        for letter in range(len(word)):
 
             if debug:
-                if commas > 0:
-                    commas -= 1
-                    print(word, end=", ")
-                else:
-                    print(word, end="]\n")
-            answerFile.write("%s " % word)
+                if debug:
+                    print(chr(ord(word[letter]) - ord('a')))
+                print("word[letter] = ", end="")
+                print(word[letter])
+                print("\nord(word[letter]) - ord('a') = ", end="")
+                print(ord(word[letter]) - ord('a'))
+                print("")
+                print(alphabet[ord(word[letter]) - ord('a')])
 
-        answerFile.write("\n")
+            alphabet[ord(word[letter]) - ord('a')][letter] += 1
 
-    # if debug: print("")
+            if debug:
+                print(alphabet[ord(word[letter]) - ord('a')])
 
-    # For each word in answers, copy the word to output file, followed by a comma and a space
-    # for word in answers: output.write("'%s', " % word)
+    # Count total frequency of each letter
+    totals = [0] * 26
+    for i in range(26):
+        if debug:
+            print(chr(ord('A') + i), end=": [\t")
+        for j in range(4):
+            if debug:
+                print(alphabet[i][j], end="\t")
+            totals[i] += alphabet[i][j]
+        if debug:
+            print(alphabet[i][4], end="\t]\n")
+            print("] ")
 
-    # After copying the combination add a new line
-    # else: output.write("\n")
+    totalSum = 0
+    spotSum = 0
 
-    # output.close()
+    order = []
 
-
-def saveProgress(comboSave):
-
-    if debug: print("Saving Progress: ", end="")
-
-
-
-    with open("guessSave", "w+") as saveFile:
-
-        for saveValue in comboSave:
-
-            if debug: print(saveValue, end=" ")
-            saveFile.write("%s " % saveValue)
-
-        saveFile.write("\n")
-
-    if debug: print("")
+    for guess in inputCombo:
 
 
-def loadProgress():
+        temp = freqCalc(totals, alphabet, guess)
 
-    try:
+        temp.append(guess)
 
-        with open("guessSave", "r") as loadFile:
+        order.append(temp)
 
-            loadLine = loadFile.readline()
-            if debug: print("Loaded line: " + loadLine)
-            loadList = loadLine.split()
-            return loadList
+        totalSum += temp[0]
+        spotSum += temp[1]
 
-    except:
+    print("\n    Total Combination Frequency: " + str(totalSum) + "\n    Total Spot Frequency: " + str(spotSum))
 
-        print("Save file does not exist")
-        return
+    order.sort(key = comboSort)
 
 
+    print("\n. [", end="")
+    commas = 4
+    for combo in order:
+        if commas > 0:
+            print(combo[2], end= ", ")
+            commas -= 1
+        else:
+            print(combo[2], end= "]\n")
 
-def makeBackup(newSave = None):
+    for combo in order:
+        print(combo[2] + ": Total Frequency = " + str(combo[0]) + ", Spot Frequency = " + str(combo[1]))
 
-    with open("guessSave", "r") as oldFile: oldLine = oldFile.readline()
-
-    if debug: print("Checking line: " + oldLine)
-
-    oldSave = oldLine.split()
-    makeSave = True
-
-    if newSave == None:
-        newSave = oldSave
-        makeSave = False
+    print("")
 
 
-    if oldSave[0] >= newSave[0]:
+def frequencyGen(input):
 
-        if debug: print("Backing up: ", end="")
+    if "', '" in input:
+        inputList = input.split(', ')
+        if debug:
+            print("Splitting with: ', '")
+    elif ', ' in input:
+        inputList = input.split(', ')
+        if debug:
+            print("Splitting with: ,")
+    elif '\' ' in input:
+        inputList = input.split('\' ')
+        if debug:
+            print("Splitting with: \'")
+    elif '; ' in input:
+        inputList = input.split('; ')
+        if debug:
+            print("Splitting with: ; ")
+    elif '. ' in input:
+        inputList = input.split('. ')
+        if debug:
+            print("Splitting with: . ")
+    elif ': ' in input:
+        inputList = input.split(': ')
+        if debug:
+            print("Splitting with: : ")
+    elif '][' in input:
+        inputList = input.split('][')
+        if debug:
+            print("Splitting with: ][")
+    elif '|' in input:
+        inputList = input.split('|')
+        if debug:
+            print("Splitting with: |")
+    else:
+        inputList = input.split()
+        if debug:
+            print("Splitting with spaces")
 
-        with open("guessBackups", "a") as backupFile:
-
-            for oldValue in oldSave:
-                if debug: print(oldValue, end=" ")
-                backupFile.write("%s " % oldValue)
-
-            backupFile.write("\n")
-            if debug: print("")
-
-        if makeSave: saveProgress(newSave)
-
+    frequency(inputList)
 
 
 def secondGuess():
@@ -206,231 +279,8 @@ def secondGuess():
                 if printLine % 10 == 0 or word[0] is not lastLetter:
                     printLine = 0
                     lastLetter = word[0]
-                    print("")
+                    # print("")
                 print(word, end=", ")
-
-
-
-
-# TODO add function description
-def comboGen(comboLen = None, openFrom = None):
-
-    makeBackup()
-
-    # If a number of words in combination is not provided
-    if comboLen is None:
-        # Then default to 4 words
-        comboLen = 4
-
-        
-
-    # Open a word list
-    # OLD with open("WordLists/officialGuesses") as listFile:
-    # with open("WordLists/officialAnswers") as listFile:
-
-        # Copy the word list to memory as wordList
-        # OLD wordList = listFile.read().splitlines()
-
-    # ---------------------- NOTE -----------------------
-    # If we think of our combination as a comboLen digit
-    # variable with n = length(wordList) possible values
-    # for each digit. We can increment the first digit
-    # until it reaches n and rolls over to the next digit
-    # ---------------------- NOTE -----------------------
-
-    wordList = loadList()
-
-    # Initialize the combination
-    combination = [0] * comboLen
-    # combination = [0, 0, 0, 0, 0]
-    # Initialize the alphabet
-    alphabet = []
-
-    if openFrom == None:
-
-        combination = loadProgress()
-
-    elif openFrom != None:
-
-        if debug: print("Printing openFrom in comboGen()", openFrom)
-
-        # if openFrom[-1] >= 0 and openFrom[-1] <= 9:
-        j = 0
-        for i in openFrom:
-            if type(i) is int:
-                combination[j] = i
-            elif type(i) is str:
-                combination.index(i)
-            j += 1
-
-    # combination[0] = 99
-    # combination
-
-    firstWord = 1 + combination[0]
-
-    printCounter = 0
-    answerCount = 0
-    counter = 0
-
-    if debug: print(len(wordList)) # DEBUG
-
-
-
-
-
-    while(combination[0] < len(wordList)):
-
-        counter += 1
-        if counter % 1000000 == 1:
-            saveProgress(combination)
-            # DELETE if debug: print("Printing loadProgress from comboGen()" + loadProgress())
-
-        if firstWord < combination[0]: firstWord = combination[0]
-            
-
-        # Clear the alphabet
-        alphabet.clear()
-
-        # For every guess in the current combination
-        for guess in range(comboLen):
-
-            i = guess
-            while combination[i] >= len(wordList):
-
-                if i == 0:
-                    print("All combinations checked")
-                    if debug: print("Front of the combo reached") # DEBUG
-                    quit()
-                
-                # if debug: print("Rolling Over") # DEBUG
-                combination[i] = firstWord
-                if combination[i-1] < len(wordList)-1 and combination[i-1] > firstWord:
-                    combination[i] = 0 + combination[i-1]
-                i -= 1
-                combination[i] += 1
-                
-
-
-            # For every letter in the guessed word
-            for letter in wordList[combination[guess]]:
-
-                # If the letter has already been used
-                if letter in alphabet:
-
-                    # Then skip this word
-                    # if(debug):
-                    #     print("Skipping word: ", wordList[combination[guess]]) # DEBUG
-
-                    combination[guess] = 1 + combination[guess]
-                    break
-
-                else:
-
-                    # Otherwise add the letter to the alphabet
-                    alphabet.append(letter)
-
-                    if len(alphabet) >= 23:
-
-                        randomizer = random.randrange(0, 50, 1)
-
-                        if randomizer == 0:
-                            alarm(1500 - random.randrange(1, 950, 50), 150 - random.randrange(0, 150, 10), 2 - random.randrange(0, 2, 1))
-                        elif randomizer < 10:
-                            alarm(800 - random.randrange(0, 100, 50), 50, 1)
-                        elif randomizer < 12:
-                            alarm(600 - random.randrange(0, 100, 50) + random.randrange(0, 500, 50), 800, 1)
-
-                        answerCount += 1
-
-                        answerList = []
-                        
-                        for answer in combination:
-
-                            answerList.append(wordList[answer])
-
-                        if printCounter <= 0:
-
-                            print(len(alphabet), end= ": ")
-                            print(answerList, end=" #")
-                            print(answerCount)
-                            printCounter += 20
-                            
-                        else:
-                            printCounter -= 1
-
-                        # print(len(alphabet), end= ": ")
-                        # print(answerList)
-                        # output.write(str(len(alphabet)))
-                        # output.write(": ")
-                        saveAnswers(answerList)
-
-                        if len(alphabet) == 24:
-
-                            alarm(350, 150, 2)
-
-                            outputPath = "Outputs/" + lists
-                            outputPath += " 24+ Unique Letters.txt"
-
-                            with open(outputPath, "a") as quickSave:
-
-                                for values in combination: quickSave.write("%d " % values)
-                                quickSave.write("\n")
-
-                                for values in answerList: quickSave.write("%s " % values)
-                                quickSave.write("\n")
-
-                            randomizer24 = random.randrange(0, 5, 1)
-                            # if randomizer24 == 1:
-                            #     alarm(1000 - random.randrange(1, 950, 50), 300, 3 - random.randrange(0, 2, 1))
-                            # else:
-                            #     alarm(350, 150, 2)
-
-                            # printCounter = 10
-                            # for jackpot in range(5):
-                            print("===================================================")
-                            print("  ===============================================")
-                            print("   ============================================\n")
-                            print(" ", end="")
-                            print(len(alphabet), end= ": ")
-                            print(answerList)
-                            print("\n   ============================================")
-                            print("  ===============================================")
-                            print("===================================================\n")
-
-                        elif len(alphabet) == 25:
-
-                            outputPath = "Outputs/" + lists
-                            outputPath += " 25+ Unique Letters.txt"
-
-                            with open(outputPath, "a") as quickSave:
-
-                                for values in combination: quickSave.write("%d " % values)
-                                quickSave.write("\n")
-
-                                for values in answerList: quickSave.write("%s " % values)
-                                quickSave.write("\n")
-
-                            
-                            alarm(700, 50, 5)
-
-                            # printCounter = 10
-                            # for jackpot in range(5):
-                            print("===================================================")
-                            print("===================================================")
-                            print("  ===============================================")
-                            print("  ===============================================")
-                            print("   ============================================")
-                            print("   ============================================\n")
-                            print(" ", end="")
-                            print(len(alphabet), end= ": ")
-                            print(answerList)
-                            print("\n   ============================================")
-                            print("   ============================================")
-                            print("  ===============================================")
-                            print("  ===============================================")
-                            print("===================================================")
-                            print("===================================================\n")
-
 
 
 
@@ -438,31 +288,23 @@ def comboGen(comboLen = None, openFrom = None):
 
 def main():
 
-    # print("\nEnable Debugging?")
-    # userInput = input("[Y/N]: ")
+    guessChecker("saine", "bbbyb")
+    quit()
 
-    # # TODO may need to change this to not [0]
-    # if userInput[0] == 'Y':
-    #     global debug
-    #     debug = True
+    guessCounter = 0
 
+    while len(answerList) > 1 and guessCounter < 9:
+        guessCounter += 1
+        print("Enter guess #", guessCounter, end= ": ")
+        userInput = input()
+        userGuess = userInput
 
-    # print("\n(1) officialAnswers[2309]\t(3) wordleAnswers[2315]")
-    # print("(2) officialGuesses[10638]\t(4) worldeGuesses[10657]")
-    # print("\n(1) officialAnswers[", len(loadList(1)), "]\t(3) wordleAnswers[", len(loadList(3)), "]\t(5) zenList[", len(loadList(5)), "]")
-    # print("\n(1) officialAnswers[", len(loadList(1)), "]\t(3) wordleAnswers[", len(loadList(3)), "]")
-    # print("(2) officialGuesses[", len(loadList(2)), "]\t(4) worldeGuesses[", len(loadList(4)), "]")
+        userInput = input("Enter results as [B/G/Y]: ")
+        userResults = userInput
+        guessChecker(userGuess, userResults)
 
-    # print("Choose a list to search.")
-    # userInput = input("[1/2/3/4]: ")
-
-    # loadList("defaultRunList")
-    # loadList(1)
-    # loadList(userInput)
-
-
-    # comboGen(5, [20,5,5,5,5])
-    secondGuess()
+    
+    # secondGuess()
 
 
 
