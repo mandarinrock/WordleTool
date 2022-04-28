@@ -6,7 +6,7 @@ debug = False
 
 
 def loadList(name):
-    
+
     if name == '1' or  name == 1: name = "officialAnswers"
     elif name == '2' or  name == 2: name = "officialGuesses"
     elif name == '3' or  name == 3: name = "wordleAnswers"

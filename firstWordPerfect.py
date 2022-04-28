@@ -1,21 +1,21 @@
 # import math
 import copy
+from datetime import date
 from sys import platform
 if platform == "win32": import winsound
-
-# from time import perf_counter
 
 # Comment or uncomment the 2nd line to toggle debug
 debug = True
 debug = False
 
-lists = "officialAnswers"
-baseFolder = "WordLists/"
-listPath =  baseFolder + lists
-guessCounter = 1
+# lists = "officialAnswers"
+# baseFolder = "WordLists/"
+# listPath =  baseFolder + lists
+guessCounter = 0
 totalGuesses = 0
 totalSuccess = 0
 totalFail = 0
+
 
 def alarm(frequency = None, duration = None, repeat = None):
 
@@ -28,24 +28,15 @@ def alarm(frequency = None, duration = None, repeat = None):
         else: print("\a")
         repeat -= 1
 
-def loadList(name = None):
 
-    global lists
-    global listPath
-    global baseFolder
+def loadList(name):
 
-    if name == None: name = lists
-    else :
-        if name == '1' or  name == 1 or name == "officialAnswers": lists = "officialAnswers"
-        elif name == '2' or  name == 2 or name == "officialGuesses": lists = "officialGuesses"
-        elif name == '3' or  name == 3 or name == "wordleAnswers": lists = "wordleAnswers"
-        elif name == '4' or  name == 4 or name == "wordleGuesses": lists = "wordleGuesses"
-        # elif name == '5' or  name == 5: lists = "zenList"
-        else:
-            lists = name
-            baseFolder += "NewLists/"
+    if name == '1' or  name == 1: name = "officialAnswers"
+    elif name == '2' or  name == 2: name = "officialGuesses"
+    elif name == '3' or  name == 3: name = "wordleAnswers"
+    elif name == '4' or  name == 4: name = "wordleGuesses"
 
-    listPath = baseFolder + str(lists)
+    listPath = "WordLists/" + name
 
     # Open the specificied list
     with open(listPath) as listFile:
@@ -55,14 +46,45 @@ def loadList(name = None):
 
     return WordList
 
-allAnswers = loadList("officialAnswers")
-curAnswer = allAnswers[0]
 
-answerList = loadList("officialAnswers")
+remainingList = loadList("officialAnswers")
+usedList = loadList("usedAnswers")
+
+
+def checkWords(day = None):
+
+    global usedList
+    global remainingList
+
+    if day == None:
+        today = date.today()
+        startingDate = date(2021, 6, 19)
+        delta = today - startingDate
+        day = delta.days
+        print("#" + str(day)) # DEBUG
+
+    if day > len(usedList):
+        day = len(usedList)
+
+    for i in range(day):
+        remainingList.remove(usedList[i])
+
+def remainingListGenerator():
+
+    userInput = input("Enter puzzle # or press " + '\033[1m' + "enter" + '\x1B[0m' + ": ")
+
+    if userInput == "": checkWords()
+    else: checkWords(userInput)
+
+# allAnswers = loadList("officialAnswers")
+allAnswers = copy.copy(remainingList)
+# curAnswer = allAnswers[0]
+
+# answerList = loadList("officialAnswers")
 
 def guessChecker(guess, results):
 
-    global answerList
+    # global answerList
     global guessCounter
     global totalGuesses
     global totalSuccess
@@ -131,7 +153,7 @@ def guessChecker(guess, results):
                 else:
 
                     if word in answerList:
-                        
+
                         answerList.remove(word)
                         bCount += 1
 
@@ -243,7 +265,6 @@ def frequency(inputCombo):
     # Count frequency of all letters in each position
     for word in answerList:
 
-        
 
         for letter in range(len(word)):
             alphabet[ord(word[letter]) - ord('a')][letter] += 1
@@ -251,11 +272,11 @@ def frequency(inputCombo):
     # Count total frequency of each letter
     totals = [0] * 26
     for i in range(26):
-        
+
         for j in range(5):
-            
+
             totals[i] += alphabet[i][j]
-            
+
     totalSum = 0
     spotSum = 0
 
@@ -354,7 +375,7 @@ def checkGuess(guess):
 def wordleBot():
 
     global curAnswer
-    global allAnswers
+    # global allAnswers
     global answerList
     global totalFail
     global totalGuesses
@@ -368,12 +389,12 @@ def wordleBot():
     # possibleGuesses = loadList("officialGuesses")
     
     # Traverse potential first words backwards to try to speed it up
-    for firstWord in reversed(allAnswers):
-    # for firstWord in allAnswers:
+    # for firstWord in reversed(allAnswers):
+    for firstWord in remainingList:
         # firstWord = "party"
         print(firstWord)
     # for firstWord in possibleGuesses:
-        answerList = copy.copy(allAnswers)
+        answerList = copy.copy(remainingList)
         count = 0
         totalFail = 0
         totalGuesses = 0
@@ -381,7 +402,7 @@ def wordleBot():
 
         for curAnswer in commonFails:
 
-            answerList = copy.copy(allAnswers)
+            answerList = copy.copy(remainingList)
             temp = guessChecker(firstWord,checkGuess(firstWord))
 
             while temp != curAnswer:
@@ -393,16 +414,16 @@ def wordleBot():
         if totalFail > 0:
                 continue
         else:
-            answerList = copy.copy(allAnswers)
+            answerList = copy.copy(remainingList)
             totalFail = 0
             totalGuesses = 0
             totalSuccess = 0
 
 
-        for curAnswer in allAnswers:
+        for curAnswer in remainingList:
             count += 1
         
-            answerList = copy.copy(allAnswers)
+            answerList = copy.copy(remainingList)
             temp = guessChecker(firstWord,checkGuess(firstWord))
             # print("Results:", checkGuess("saine"), "->", temp)
             # if temp not in seconds:
@@ -434,12 +455,14 @@ def wordleBot():
             if totalFail < 2:
                 averageGuesses = totalGuesses / (count - totalFail)
                 averageSuccess = 100 * totalSuccess / count
-                outputStr = "The word: \'" + firstWord +  "\' took " + str(format(averageGuesses, ".3f")) + " guesses on average for " + str(totalSuccess) + " of " + str(len(allAnswers)) + " total words. Amounting to a success rate of " + str(format(averageSuccess, ".2f")) + "%\n"
+                outputStr = "The word: \'" + firstWord +  "\' took " + str(format(averageGuesses, ".3f")) + " guesses on average for " + str(totalSuccess) + " of " + str(len(remainingList)) + " total words. Amounting to a success rate of " + str(format(averageSuccess, ".2f")) + "%\n"
                 print(outputStr)
                 with open("Outputs/perfectfirstWords", 'a') as firstWordOutput:
                     firstWordOutput.write(outputStr)
 
 def main():
+
+    remainingListGenerator()
 
     wordleBot()
 
