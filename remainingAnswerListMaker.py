@@ -37,6 +37,14 @@ def writeRemaining():
             remainingFile.write(unused)
             remainingFile.write("\n")
 
+    with open("Outputs/remainingAnswers", 'w') as remainingFile:
+
+        for unused in remainingList:
+            remainingFile.write(unused)
+            remainingFile.write("\n")
+
+    print("Remaining answer list generated")
+
 
 def checkWords(day = None):
 
@@ -59,13 +67,17 @@ def checkWords(day = None):
     writeRemaining()
 
 
-def main():
-    
+def remainingListGenerator():
+
     userInput = input("Enter puzzle # or press " + '\033[1m' + "enter" + '\x1B[0m' + ": ")
 
     if userInput == "": checkWords()
     else: checkWords(userInput)
 
+
+def main():
+
+    remainingListGenerator()
 
 
 if(__name__ == '__main__'):
